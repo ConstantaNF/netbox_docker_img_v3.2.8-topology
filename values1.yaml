@@ -1,0 +1,67 @@
+# Переопределение устанавливаемого образа на мой кастомный
+image:
+  registry: docker.io
+  repository: constantanf/my_netbox
+  tag: v3.2.8-topology
+  pullPolicy: IfNotPresent
+
+# Меняем региональные настройки
+timeZone: Europe/Moscow
+
+# Настройки внешней базы данных
+#postgresql:
+#  enabled: false
+
+#externalDatabase:
+#  enabled: true
+#  type: postgresql
+#  host: <postgresql_host> # IP адрес или DNS имя сервера с PostgreSQL
+#  port: 5432
+#  database: kube_netbox
+#  username: netbox
+#  password: netbox
+#  existingSecret: netbox-db-secret
+#  existingSecretPasswordKey: password
+
+# Включаем плагин и при необходимости играемся с настройками
+plugins: [
+  "netbox_topology_views"
+]
+
+#pluginsConfig: {
+#  netbox_topology_views: {
+#    draw_default_layout: true,
+#    static_image_directory: "netbox_topology_views/img",
+#    allow_coordinates_saving: true,
+#    enable_circuit_terminations: true,
+#    device_img: [
+#      "router",
+#      "switch",
+#      "firewall",
+#      "server",
+#      "storage",
+#      "access-point",
+#      "generic-device"
+#    ]
+#  }
+#}
+
+# Добавляем pvc для статики при необходимости. При использовании данной настройки необходимо предварительно создать pvc с помощью отдельного манифеста kube-netbox-static.yaml
+#extraVolumes:
+#  - name: static-pvc
+#    persistentVolumeClaim:
+#      claimName: kube-netbox-static
+
+#extraVolumeMounts:
+#  - name: static-pvc
+#    mountPath: /opt/netbox/netbox/static
+#    subPath: static
+
+# На момент создания образа репа bitnami/redis пустая. Поэтому переопределяем используемый репозиторий для redis, если требуется.
+#redis:
+#  image:
+#    enabled: true 
+#    registry: docker.io
+#    repository: bitnamilegacy/redis
+#    tag: 6.2.6
+#    pullPolicy: IfNotPresent

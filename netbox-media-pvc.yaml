@@ -1,0 +1,11 @@
+# В случае необходимости можно создать PVC для медиа-файлов NetBox через этот манифест
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kube-netbox-media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
