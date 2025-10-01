@@ -1,4 +1,3 @@
-*
 # ****Образ netbox_docker_img_v3.2.8-topology c установленным плагином netbox-topology-views v.2.0.3**** #
 
 Версия helm chart <https://github.com/netbox-community/netbox-chart/tree/4.1.1>
